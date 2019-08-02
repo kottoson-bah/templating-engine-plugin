@@ -7,7 +7,7 @@ stage("Unit Test"){
   node{
     unstash "workspace"
 
-    sh "docker run --rm -v \$(pwd):/home/gradle/project -w /home/gradle/project -u gradle gradle:4.10.3 gradle clean test && touch \$(ls target/test-results/test/*.xml)"
+    sh "docker run --rm -v \$(pwd):/home/gradle/project -w /home/gradle/project -u root gradle:4.10.3 gradle clean test && touch \$(ls target/test-results/test/*.xml)"
     archiveArtifacts "target/reports/tests/test/**"
     junit "target/test-results/test/*.xml"
     stash "workspace"
@@ -28,7 +28,7 @@ parallel "Compile Docs": {
   stage("Build Plugin"){
     node{
       unstash "workspace"
-      sh "docker run --rm -v \$(pwd):/home/gradle/project -w /home/gradle/project -u gradle gradle:4.10.3 gradle clean jpi"
+      sh "docker run --rm -v \$(pwd):/home/gradle/project -w /home/gradle/project -u root gradle:4.10.3 gradle clean jpi"
       archiveArtifacts "build/libs/templating-engine.hpi"
     }
   }
