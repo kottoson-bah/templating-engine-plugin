@@ -7,7 +7,7 @@ stage("Unit Test"){
   node{
     unstash "workspace"
 
-    sh "docker run --rm -v \$(pwd):/home/gradle/project -w /home/gradle/project -u root gradle:4.10.3 gradle clean test && touch \$(ls target/test-results/test/*.xml)"
+    sh "docker run --rm -v \$(pwd):/home/gradle/project -w /home/gradle/project -u root gradle:4.10.3 gradle clean test && touch \$(ls build/test-results/test/*.xml)"
     archiveArtifacts "target/reports/tests/test/**"
     junit "target/test-results/test/*.xml"
     stash "workspace"
