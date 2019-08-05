@@ -24,7 +24,7 @@ parallel "Compile Docs": {
   stage("Static Code Analysis"){
     echo "placeholder Static Code Analysis code"
   }
-}, "Build Plugin" {
+}, "Build Plugin": {
   stage("Build Plugin"){
     node{
       unstash "workspace"
