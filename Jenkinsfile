@@ -23,9 +23,7 @@ parallel "Compile Docs": {
     }
   }
 }, "Static Code Analysis": {
-  stage("Static Code Analysis"){
-    static_code_analysis()
-  }
+  static_code_analysis()
 }, "Build Plugin": {
   stage("Build Plugin"){
     node{
