@@ -19,7 +19,7 @@ parallel "Compile Docs": {
     node{
       unstash "workspace"
       sh "make docs"
-      archiveArtifacts "_build/html/**"
+      archiveArtifacts "docs/_build/html/**"
     }
   }
 // }, "Static Code Analysis": {
