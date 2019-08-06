@@ -40,11 +40,9 @@ parallel "Compile Docs": {
 def static_code_analysis(){
 
   // sonarqube api token
-  cred_id = config.credential_id ?:
-            "sonarqube"
+  cred_id = "sonarqube"
 
-  enforce = config.enforce_quality_gate ?:
-            true
+  enforce = true
 
   stage("SonarQube Analysis"){
     inside_sdp_image "sonar-scanner", {
@@ -75,8 +73,6 @@ def static_code_analysis(){
 }
 
 void inside_sdp_image(String img, Closure body){
-
-  config.images ?: { error "SDP Image Config not defined in Pipeline Config" } ()
 
   def sdp_img_reg = 'docker-registry.default.svc:5000'
 
