@@ -3,16 +3,16 @@ node{
   stash "workspace"
 }
 
-stage("Unit Test"){
-  node{
-    unstash "workspace"
-
-    sh "docker run --rm -v \$(pwd):/home/gradle/project -w /home/gradle/project -u root gradle:4.10.3 gradle clean test && touch \$(ls build/test-results/test/*.xml)"
-    archiveArtifacts "build/reports/tests/test/**"
-    junit "build/test-results/test/*.xml"
-    stash "workspace"
-  }
-}
+// stage("Unit Test"){
+//   node{
+//     unstash "workspace"
+//
+//     sh "docker run --rm -v \$(pwd):/home/gradle/project -w /home/gradle/project -u root gradle:4.10.3 gradle clean test && touch \$(ls build/test-results/test/*.xml)"
+//     archiveArtifacts "build/reports/tests/test/**"
+//     junit "build/test-results/test/*.xml"
+//     stash "workspace"
+//   }
+// }
 
 parallel "Compile Docs": {
   stage("Compile Docs"){
@@ -74,7 +74,7 @@ def static_code_analysis(){
 
 void inside_sdp_image(String img, Closure body){
 
-  def sdp_img_reg = 'docker-registry.default.svc:5000'
+  def sdp_img_reg = 'http://docker-registry.default.svc:5000'
 
   def sdp_img_repo = "pipeline-for-sdp"
 
